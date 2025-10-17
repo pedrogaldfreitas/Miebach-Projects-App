@@ -11,6 +11,6 @@ Requirements: MySQL Server, Node.js, Python (3.13 or 3.14 should do, if online i
 - In Miebach-Projects-App/frontend, run ```npm run demo``` to run the frontend. *(If this doesn't work, run ```npm install``` followed by ```npm run dev``` in the frontend folder)*.
 
 ### Assumptions
-
+- Despite the start_date and end_date of the project, the manager can start the project whenever to lock phases.
 - When seeing each contributor's Resource Utilization for a project, we display the staffed hours for **each week**, but we only have the contributors' **total Forecasted Hours** attribute. Therefore, for each 'Staffed' value in the utilization period, I assumed uniform staffing hours distribution for every week of the project and simply divided each contributor's total forecasted hours by 7 (days in a week).
 - When invoicing, the case study instructions asks us to provide a table with the attributes **Task, Phase, Hours, Rate, Amount**. However, we know that the rate also depends on which contributor works on the task, as they have their own rate. Therefore, I added an extra column on the invoicing table for **Contributor**.
