@@ -5,7 +5,6 @@ Requirements: MySQL Server, Node.js, Python (3.13 or 3.14 should do, if online i
 - Pull repository into local machine with ```git clone https://github.com/pedrogaldfreitas/Miebach-Projects-App.git```
 - Get DB Backup (store this in a file called db or something in the repo)
 - Run Database (Should be Services.msc -> MySQL80)
-- Restore database
 - pip install in the backend folder
 - In Miebach-Projects-App/backend, run ```.venv\Scripts\python -m pip install -r requirements.txt``` to install backend dependencies.
 - In Miebach-Projects-App/backend, run ```pip install``` followed by ```python -m uvicorn main:app --reload``` to run the backend.
