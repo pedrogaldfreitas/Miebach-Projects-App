@@ -1,13 +1,25 @@
-# This file sets up the database connection and session management for SQLAlchemy.
-
+# backend/database.py
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.engine import URL
 
-URL_DATABASE = 'mysql+pymysql://root:MyNewPass123@localhost:3306/miebachprojectsapp'
+DB_USER = "root"
+DB_PASS = "MyNewPass123"
+DB_HOST = "localhost"
+DB_PORT = 3306
+DB_NAME = "miebachprojectsapp"
 
-engine = create_engine(URL_DATABASE)
+# safest way to build the URL (handles quoting)
+DATABASE_URL = URL.create(
+    drivername="mysql+pymysql",
+    username=DB_USER,
+    password=DB_PASS,
+    host=DB_HOST,
+    port=DB_PORT,
+    database=DB_NAME,
+    query={"charset": "utf8mb4"},
+)
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
+engine = create_engine(DATABASE_URL, pool_pre_ping=True, future=True)
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 Base = declarative_base()

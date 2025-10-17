@@ -11,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from datetime import date, datetime, timedelta
 from typing import List, Dict, Any, Optional
 from fastapi.responses import JSONResponse
+from seed_data import seed_initial_data
 
 # routes/invoices.py (or inside your main app file if you keep routes together)
 from sqlalchemy import func, and_
@@ -124,9 +125,13 @@ def get_db():
         
 db_dependency = Annotated[Session, Depends(get_db)]
 
-@app.get("/")
-def root():
-    return {"message": "Hello, World!"}
+@app.on_event("startup")
+async def on_startup():
+    db = SessionLocal()
+    try:
+        seed_initial_data(db)
+    finally:
+        db.close()
 
 # Mock login.
 @app.post("/login/", status_code=status.HTTP_200_OK)
