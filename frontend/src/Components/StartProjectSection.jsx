@@ -14,7 +14,6 @@ const StartProjectSection = ({ project, onSubmit }) => {
       .then((response) => {
         console.log("Project started:", response.data);
         if (onSubmit) onSubmit();
-        //For later: Make the START PROJECT button different; either fade it to grey or replace it with an "End Project" button.
       })
       .catch((error) => {
         console.error("Error starting project:", error);
